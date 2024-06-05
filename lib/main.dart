@@ -2,6 +2,7 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:notes1/app_state.dart';
 import 'package:notes1/auth_gate.dart';
 import 'package:provider/provider.dart';
@@ -43,14 +44,16 @@ class MyApp extends StatelessWidget {
         }
 
         return MaterialApp(
-          title: 'A Notes',
+          title: 'Notes 1',
           theme: ThemeData(
             colorScheme: lightColorScheme,
             useMaterial3: true,
+            textTheme: GoogleFonts.openSansTextTheme(ThemeData.light().textTheme),
           ),
           darkTheme: ThemeData(
             colorScheme: darkColorScheme,
             useMaterial3: true,
+            textTheme: GoogleFonts.openSansTextTheme(ThemeData.dark().textTheme),
           ),
           themeMode: ThemeMode.system,
           home: const AuthGate(),

@@ -55,6 +55,15 @@ class NoteItem extends StatelessWidget {
     final dateFormatFull = DateFormat('MMMM dd, yyyy HH:mm:ss');
     return Dismissible(
       key: Key(note.id),
+      direction: DismissDirection.endToStart,
+      background: Container(
+        color: Theme.of(context).colorScheme.primaryContainer,
+        alignment: Alignment.centerRight,
+        padding:const EdgeInsets.symmetric(horizontal: 20),
+        child: const Icon(Icons.edit),
+        
+      ),
+      
       confirmDismiss: (direction) async {
         Navigator.push(
           context,
