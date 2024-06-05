@@ -25,8 +25,8 @@ Technically buildable on IOS and Mac (probably)
 <!-- GETTING STARTED -->
 ## Getting Started
 <br/>
-Head over to the <a href="https://github.com/renter112/notes1/releases/tag/v1.0.0">releases</a> tab and download the appropriate files <br/>
-if you're using a modern android phone, you can download the <a href="https://github.com/renter112/notes1/releases/tag/v1.0.0/app-arm64-v8a-release.apk" >apk directly</a> 
+Head over to the <a href="https://github.com/renter112/notes1/releases/tag/1.0.0">releases</a> tab and download the appropriate files <br/>
+if you're using a modern android phone, you can download the <a href="https://github.com/renter112/notes1/releases/tag/1.0.0/app-arm64-v8a-release.apk" >apk directly</a> 
 <br/>
 Android might warn you about installing from a non-google play store app, but just ignore that.
 <br/>
