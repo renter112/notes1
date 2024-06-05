@@ -19,6 +19,8 @@ class NoteItem extends StatelessWidget {
     required this.saveNote,
   });
 
+  final snackBar = const SnackBar(content: Text('Note Copied'),);
+
   void onDeletePressedConfirm(BuildContext context, Note note) {
     showDialog(
       context: context, 
@@ -50,14 +52,17 @@ class NoteItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dateFormat = DateFormat('MMM dd, yyyy');
-    return GestureDetector(
-      onTap: () {
+    final dateFormatFull = DateFormat('MMMM dd, yyyy HH:mm:ss');
+    return Dismissible(
+      key: Key(note.id),
+      confirmDismiss: (direction) async {
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => NoteEdit(note: note, saveNote: saveNote)
           ),
         );
+        return false;
       },
       child: Card(
         elevation: 2.0,
@@ -82,11 +87,14 @@ class NoteItem extends StatelessWidget {
                           scrollPhysics: const ClampingScrollPhysics(),
                         ),
                       ),
-                      Text(
-                        dateFormat.format(note.date),
-                        style: const TextStyle(
-                          color: Colors.grey,
-                          fontSize: 12,
+                      Tooltip(
+                        message: dateFormatFull.format(note.date),
+                        child: Text(
+                          dateFormat.format(note.date),
+                          style: const TextStyle(
+                            color: Colors.grey,
+                            fontSize: 12,
+                          ),
                         ),
                       ),
                     ],
@@ -113,7 +121,10 @@ class NoteItem extends StatelessWidget {
                         onPressed: () => Share.share('${note.title}\n${note.content}'),
                       ),
                       IconButton(
-                        onPressed: () async => await Clipboard.setData(ClipboardData(text: '${note.title}\n${note.content}')),
+                        onPressed: () async {
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                         await Clipboard.setData(ClipboardData(text: '${note.title}\n${note.content}'));
+                        },
                         icon: const Icon(Icons.copy),
                       ),
                       IconButton(
@@ -181,15 +192,13 @@ class FormCard extends StatelessWidget {
   final TextEditingController controllerTitle;
   final TextEditingController controllerContent;
   final FutureOr<void> Function(Note) addNote;
-  final Function() formHide;
-  
+
   const FormCard({
     super.key,
     required this.formKey,
     required this.controllerTitle,
     required this.controllerContent,
     required this.addNote,
-     required this.formHide,
   });
 
   @override
@@ -240,7 +249,6 @@ class FormCard extends StatelessWidget {
                       ));
                       controllerTitle.clear();
                       controllerContent.clear();
-                      formHide();
                     }
                   },
                 ),

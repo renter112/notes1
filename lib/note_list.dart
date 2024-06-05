@@ -36,11 +36,7 @@ class _NoteListState extends State<NoteList> {
         Column(
         children: [
           if (_isFormVisible) 
-            FormCard(formKey: _formKey, controllerTitle: _controllerTitle, controllerContent: _controllerContent, addNote: widget.addNote, formHide:() {
-          setState(() {
-            _isFormVisible = !_isFormVisible;
-          });
-        }),
+            FormCard(formKey: _formKey, controllerTitle: _controllerTitle, controllerContent: _controllerContent, addNote: widget.addNote,),
           Expanded(
             child: GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
